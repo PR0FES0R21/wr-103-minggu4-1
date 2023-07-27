@@ -54,6 +54,8 @@ def posting():
     newCardName = f'card-{formatTime}.{cardImage.filename.split(".")[-1]}'
     newProfileName = f'profile-{formatTime}.{cardImage.filename.split(".")[-1]}'
 
+    uploadTime = currentDatetime.strftime('%d-%m-%Y')
+
     
     # simpan file ke dalam folder img
     pathDestinationCard = f'static/img/card/{newCardName}'
@@ -63,11 +65,12 @@ def posting():
     profile.save(pathDestinationProfile)
 
     # memasukan data ke database
-    result = db.diary.insert_one({
+    result = db.diary1.insert_one({
         'judul': judul,
         'komentar': komentar,
         'cardImageName': newCardName,
-        'profileImageName': newProfileName
+        'profileImageName': newProfileName,
+        'uploadTime': uploadTime
     })
     if result.inserted_id:
         return jsonify({
@@ -81,7 +84,7 @@ def posting():
 
 @app.route('/diary', methods=["GET"])
 def listing():
-    data_list = list(db.diary.find({}, {'_id': False}))
+    data_list = list(db.diary1.find({}, {'_id': False}))
     return jsonify(data_list)
     
     

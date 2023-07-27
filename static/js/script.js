@@ -89,6 +89,7 @@ function listing() {
         const komentar = data["komentar"];
         const cardImage = data["cardImageName"];
         const profileImage = data["profileImageName"];
+        const uploadTime = data['uploadTime'] || '??.??.????'
 
         // Buat elemen card HTML menggunakan template literal
         const cardHTML = `
@@ -99,7 +100,7 @@ function listing() {
                 <img src="../static/img/profile/${profileImage}" alt="Gambar" class="card-img-top rounded-circle mb-2" style="width: 60px; height: 60px; object-fit: cover;">
                 <h5 class="card-title">${judul}</h5>
                   <p class="card-text">${komentar}</p>
-                  <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6>
+                  <h6 class="card-subtitle mb-2 text-body-secondary">${uploadTime}</h6>
                 </div>
               </div>
             </div>
